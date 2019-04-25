@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        Route path="*" component={NotFound} />
+        <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
