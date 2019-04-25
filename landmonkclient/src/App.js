@@ -17,7 +17,7 @@ class App extends Component {
           <Layout>
             {/* <Route exact path="/" component={TopNavLogo} /> */}
 
-            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" component={Home} />
             {/* <Route path="/owner-list" component={AsyncComponentList} /> */}
             {/* <Route path="*" component={notFound} /> */}
           </Layout>

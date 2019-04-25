@@ -5,9 +5,11 @@ import './Home.css';
 const home = (props) => {
     return (
         <Row>
-            <Col md={12}>
+            <Col md={6}>
                 <div className={'homeText'}>
-                    Welcome to Account Owner Application!
+                    <div className="home-body">
+                        Welcome to LandMonk Application!
+                    </div>
                 </div>
             </Col>
         </Row>
