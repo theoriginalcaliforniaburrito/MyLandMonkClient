@@ -5,7 +5,7 @@ import './Home.css';
 const home = (props) => {
     return (
         <Row>
-            <Col md={6}>
+            <Col md={12}>
                 <div className={'homeText'}>
                     <div className="home-body">
                         Welcome to LandMonk Application!
