@@ -11,7 +11,7 @@ class NavBar extends Component {
     render() {
         return (
             <div className="topbar-menu">
-                <div className="container-fluid">
+                <div>
                     <div id="navigation" className="active">
                         <ul className="navigation-menu">
                             <li className="home"><img className="home-icon" src={img} alt="" height="18"/>Home</li>

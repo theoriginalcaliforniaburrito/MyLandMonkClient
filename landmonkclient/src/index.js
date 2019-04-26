@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
 import repositoryReducer from './store/reducers/repositoryReducer';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
