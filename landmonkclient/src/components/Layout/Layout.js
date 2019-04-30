@@ -5,15 +5,14 @@ import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 const Layout = (props) => {
     return (
-        <Aux>
-            <Navigation />
-            <Grid>
-                <main>
-                    {props.children}
-                </main>
-            </Grid>
-        </Aux>
-
+        <Grid>
+            <Row>
+                <Navigation />
+            </Row>
+            <main>
+                {props.children}
+            </main>
+        </Grid>
     );
 }
 
