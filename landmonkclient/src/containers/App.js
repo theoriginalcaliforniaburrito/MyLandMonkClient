@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
 import NotFound from '../components/ErrorPages/NotFound/NotFound';
+import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/updateProperty/:id" component={UpdateProperty} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>

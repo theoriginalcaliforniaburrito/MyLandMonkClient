@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import returnPropertyInputConfiguration from '../../../Utility/PropertyInputConfiguration'
-import { Well, Form, Col, Button, FormGroup } from 'react-bootstrap';
+
+import * as repositoryActions from '../../../store/actions/repositoryActions';
+import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
+
+
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+
 
 class UpdateProperty extends Component {
-    state = {  }
+    state = {  
+        propertyForm: {},
+        isFormValid: true
+    }
     render() { 
         return (  
             <div className="wrapper">
@@ -73,7 +85,7 @@ class UpdateProperty extends Component {
 
                 <ErrorModal show={this.props.showErrorModal}
                     modalHeaderText={'Error message'}
-                    modalBodyText={this.props.errorMessage.title || this.props.errorMessage}
+                    modalBodyText={this.props.errorMessage || this.props.errorMessage}
                     okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
             </div>
         </div>
