@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios/axios';
+import * as errorHandlerActions from './errorHandlerActions';
 
 const getDataSuccess = (data) => {
     return {
@@ -34,7 +35,7 @@ export const postData = (url, obj, props) => {
             dispatch(postDataSuccess(response));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props))
         })
     }
 }
@@ -74,5 +75,13 @@ export const deleteData = (url, props) => {
         .catch(error => {
             //TODO: handle the error when implemented
         })
+    }
+}
+
+export const closeSuccessModal = (url, props) => {
+    return {
+        type: actionTypes.CLOSE_SUCCESS_MODAL,
+        props: props,
+        url: url
     }
 }
