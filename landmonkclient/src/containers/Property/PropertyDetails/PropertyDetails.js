@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
+import Property from '../../../components/PropertyComponents/Property/Property';
 import PropertyUnits from '../../../components/PropertyComponents/PropertyUnits/PropertyUnits';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 

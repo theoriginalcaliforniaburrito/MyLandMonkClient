@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import { Button } from 'react-bootstrap';
+import House from '../../../img/house.png';
 
 const redirectToPropertyDetails = (id, history) => {
     history.push('/propertyDetails/' + id);
