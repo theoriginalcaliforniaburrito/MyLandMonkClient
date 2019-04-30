@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+import { connect } from 'react-redux';
+import * as repositoryActions from '../../../store/actions/repositoryActions';
+import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 
 
 class UpdateTenant extends Component {
@@ -17,20 +22,39 @@ class UpdateTenant extends Component {
         this.props.onGetTenantById(url, { ...this.props });
     }
 
-    handleChangeEvent = (event, id) => {
+    handleChangeEvent = (e) => {
         const updatedTenantForm = { ...this.state.tenantForm };
+        updatedTenantForm[e.target.id] =  e.target.value
+        this.setState({ tenantForm: updatedTenantForm});
+    }
+    
+    componentWillReceiveProps = (nextProps) => {
+        const updatedTenantForm = { ...this.state.tenantForm };
+        let firstNameObject = { ...updatedTenantForm.firstName };
+        let lastNameObject = { ...updatedTenantForm.lastName };
+        let emailObject = { ...updatedTenantForm.email };
+        let cellPhoneObject = { ...updatedTenantForm.cellPhone };
 
-        this.setState({});
+        firstNameObject.value = nextProps.data.firstName;
+        lastNameObject.value = nextProps.data.lastName;
+        emailObject.value = nextProps.data.email;
+        cellPhoneObject.value = nextProps.data.cellPhone;
+
+        updatedTenantForm['firstName'] = firstNameObject;
+        updatedTenantForm['lastName'] = lastNameObject;
+        updatedTenantForm['email'] = emailObject;
+        updatedTenantForm['cellPhone'] = cellPhoneObject;
+        this.setState({ tenantForm: updatedTenantForm });
     }
 
     updateTenant = (event) => {
         event.preventDefault();
 
         const tenantToUpdate = {
-            firstName: this.state.tenantForm.firstName,
-            lastName: this.state.tenantForm.lastName,
-            email: this.state.tenantForm.email,
-            cellPhone: this.state.tenantForm.cellPhone,
+            firstName: this.state.tenantForm.firstName.value,
+            lastName: this.state.tenantForm.lastName.value,
+            email: this.state.tenantForm.email.value,
+            cellPhone: this.state.tenantForm.cellPhone.value,
         }
 
         const url = '/api/tenant/' + this.props.data.id;
@@ -89,7 +113,7 @@ class UpdateTenant extends Component {
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="cellPhone" className="col-form-label">Cell Phone</label>
                                                 <input type="text" required
-                                                    value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="email" />
+                                                    value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="cellPhone" />
                                             </div>
                                         </div>
 
@@ -118,4 +142,22 @@ class UpdateTenant extends Component {
     }
 }
 
-export default UpdateTenant;
+const mapStateToProps = (state) => {
+    return {
+        data: state.repository.data,
+        showSuccessModal: state.repository.showSuccessModal,
+        showErrorModal: state.errorHandler.showErrorModal,
+        errorMessage: state.errorHandler.errorMessage
+    }
+}
+
+const mapPropsToDispatch = dispatch => {
+    return {
+        onGetTenantById: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onUpdateTenant: (url, tenant, props) => dispatch(repositoryActions.putData(url, tenant, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
+    }
+}
+
+export default connect(mapStateToProps, mapPropsToDispatch)(UpdateTenant);
