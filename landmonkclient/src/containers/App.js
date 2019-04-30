@@ -12,7 +12,7 @@ function App() {
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/create-property" exact component={CreateProperty} />
+          <Route path="/createProperty" exact component={CreateProperty} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>
