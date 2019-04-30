@@ -24,26 +24,56 @@ class UpdateProperty extends Component {
 
     componentDidMount() {
         let id = this.props.match.params.id; 
-        let url = 'api/property' + id;
-        // this.props.onGetPropertyById(url, {...this.props});
+        let url = 'api/property/' + id;
+        this.props.onGetPropertyById(url, {...this.props});
     }
 
-    handleChangeEvent = (event, id) => {
+    handleChangeEvent = (event, value) => {
         const updatedPropertyForm = {...this.state.propertyForm};
-        this.setState({ propertyForm: updatedPropertyForm});
+        // updatedPropertyForm[id] = 
+        this.setState({ 
+            propertyForm: {
+                ...this.state.propertyForm,
+                [value]: event.target.value
+            }
+        });
+    }
+
+    componentWillReceiveProps = nextProps => {
+        const updatedPropertyForm = { ...this.state.propertyForm };
+        let propertyNameObject = { ...updatedPropertyForm.propertyName }; 
+        let addressObject = { ...updatedPropertyForm.address }; 
+        let cityObject = { ...updatedPropertyForm.city }; 
+        let stateObject = { ...updatedPropertyForm.state }; 
+        let zipCodeObject = { ...updatedPropertyForm.zipCode }; 
+
+        propertyNameObject = nextProps.data.propertyName;
+        addressObject = nextProps.data.address;
+        cityObject = nextProps.data.city;
+        stateObject = nextProps.data.state;
+        zipCodeObject  = nextProps.data.zipCode;
+
+        updatedPropertyForm['propertyName'] = propertyNameObject; 
+        updatedPropertyForm['address'] = addressObject; 
+        updatedPropertyForm['city'] = cityObject; 
+        updatedPropertyForm['state'] = stateObject; 
+        updatedPropertyForm['zipCode'] = zipCodeObject; 
+        this.setState({ propertyForm: updatedPropertyForm });
+
     }
 
     updateProperty = event => {
         event.preventDefault();
 
         const propertyToUpdate = {
-            propertyName: this.state.propertyForm.propertyName.value,
-            address: this.state.propertyForm.address.value,
-            city: this.state.propertyForm.city.value,
-            state: this.state.propertyForm.state.value,
-            zipCode: this.state.propertyForm.zipCode.value,
+            propertyName: this.state.propertyForm.propertyName,
+            address: this.state.propertyForm.address,
+            city: this.state.propertyForm.city,
+            state: this.state.propertyForm.state,
+            zipCode: this.state.propertyForm.zipCode,
         }
 
+        console.log(propertyToUpdate)
         const url = '/api/property/' + this.props.data.id; 
         this.props.onUpdateProperty(url, propertyToUpdate, {...this.props }); 
     }
@@ -76,27 +106,27 @@ class UpdateProperty extends Component {
                                         <div className="form-group col-md-6">
                                             <label htmlFor="propertyName" className="col-form-label">Property Name</label>
                                             <input type="text" required
-                                                value={this.state.propertyForm.propertyName} onChange={e => this.handleChangeEvent(e)} className="form-control" id="propertyName" />
+                                                value={this.state.propertyForm.propertyName} onChange={e => this.handleChangeEvent(e, "propertyName")} className="form-control" id="propertyName" />
                                         </div>
                                     </div>
 
                                     <div className="form-group">
                                         <label htmlFor="address" className="col-form-label">Address</label>
-                                        <input type="text" required value={this.state.propertyForm.address} onChange={e => this.handleChangeEvent(e)} className="form-control" id="address1" />
+                                        <input type="text" required value={this.state.propertyForm.address} onChange={e => this.handleChangeEvent(e, "address")} className="form-control" id="address" />
                                     </div>
 
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
                                             <label htmlFor="city" className="col-form-label">City</label>
-                                            <input type="text" required value={this.state.propertyForm.city} onChange={e => this.handleChangeEvent(e)} className="form-control" id="city" />
+                                            <input type="text" required value={this.state.propertyForm.city} onChange={e => this.handleChangeEvent(e, "city")} className="form-control" id="city" />
                                         </div>
                                         <div className="form-group col-md-2">
                                             <label htmlFor="state" className="col-form-label">State</label>
-                                            <input type="text" required minLength="2" maxLength="2" value={this.state.propertyForm.state} onChange={e => this.handleChangeEvent(e)} className="form-control" id="state" />
+                                            <input type="text" required minLength="2" maxLength="2" value={this.state.propertyForm.state} onChange={e => this.handleChangeEvent(e, "state")} className="form-control" id="state" />
                                         </div>
                                         <div className="form-group col-md-4">
                                             <label htmlFor="zipCode" className="col-form-label">Zip</label>
-                                            <input type="text" required value={this.state.propertyForm.zipCode} onChange={e => this.handleChangeEvent(e)} className="form-control" id="zipCode" />
+                                            <input type="text" required value={this.state.propertyForm.zipCode} onChange={e => this.handleChangeEvent(e, "zipCode")} className="form-control" id="zipCode" />
                                         </div>
                                     </div>
 
@@ -118,7 +148,7 @@ class UpdateProperty extends Component {
 
                 <ErrorModal show={this.props.showErrorModal}
                     modalHeaderText={'Error message'}
-                    modalBodyText={this.props.errorMessage || this.props.errorMessage}
+                    modalBodyText={this.props.errorMessage.title || this.props.errorMessage}
                     okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
             </div>
         </div>
@@ -138,7 +168,7 @@ const mapStateToProps = state => {
 
 const mapPropsToDispatch = dispatch => {
     return {
-        ongetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onGetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
         onUpdateProperty: (url, property, props) => dispatch(repositoryActions.putData(url, property, props)),
         onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
