@@ -6,7 +6,7 @@ import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 
 
-class UpdateTenant extends Component {
+class EditTenant extends Component {
     state = {
         tenantForm: {
             firstName: '',
@@ -30,20 +30,12 @@ class UpdateTenant extends Component {
     
     componentWillReceiveProps = (nextProps) => {
         const updatedTenantForm = { ...this.state.tenantForm };
-        let firstNameObject = { ...updatedTenantForm.firstName };
-        let lastNameObject = { ...updatedTenantForm.lastName };
-        let emailObject = { ...updatedTenantForm.email };
-        let cellPhoneObject = { ...updatedTenantForm.cellPhone };
 
-        firstNameObject.value = nextProps.data.firstName;
-        lastNameObject.value = nextProps.data.lastName;
-        emailObject.value = nextProps.data.email;
-        cellPhoneObject.value = nextProps.data.cellPhone;
-
-        updatedTenantForm['firstName'] = firstNameObject;
-        updatedTenantForm['lastName'] = lastNameObject;
-        updatedTenantForm['email'] = emailObject;
-        updatedTenantForm['cellPhone'] = cellPhoneObject;
+        updatedTenantForm.firstName = nextProps.data.firstName;
+        updatedTenantForm.lastName = nextProps.data.lastName;
+        updatedTenantForm.email = nextProps.data.email;
+        updatedTenantForm.cellPhone = nextProps.data.cellPhone;
+        
         this.setState({ tenantForm: updatedTenantForm });
     }
 
@@ -51,10 +43,10 @@ class UpdateTenant extends Component {
         event.preventDefault();
 
         const tenantToUpdate = {
-            firstName: this.state.tenantForm.firstName.value,
-            lastName: this.state.tenantForm.lastName.value,
-            email: this.state.tenantForm.email.value,
-            cellPhone: this.state.tenantForm.cellPhone.value,
+            firstName: this.state.tenantForm.firstName,
+            lastName: this.state.tenantForm.lastName,
+            email: this.state.tenantForm.email,
+            cellPhone: this.state.tenantForm.cellPhone,
         }
 
         const url = '/api/tenant/' + this.props.data.id;
@@ -160,4 +152,4 @@ const mapPropsToDispatch = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(UpdateTenant);
+export default connect(mapStateToProps, mapPropsToDispatch)(EditTenant);

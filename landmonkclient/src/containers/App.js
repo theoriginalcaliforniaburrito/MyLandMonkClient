@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
 import CreateProperty from './CreateProperty/CreateProperty';
-import UpdateTenant from './Tenants/UpdateTenant/UpdateTenant';
+import EditTenant from './Tenants/EditTenant/EditTenant';
 import NotFound from '../components/ErrorPages/NotFound/NotFound';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/createProperty" component={CreateProperty} />
-          <Route path="/updateTenant" component={UpdateTenant} />
+          <Route path="/editTenant/:id" component={EditTenant} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>
