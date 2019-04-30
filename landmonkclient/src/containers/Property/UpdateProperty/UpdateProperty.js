@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-import returnPropertyInputConfiguration from '../../../Utility/PropertyInputConfiguration'
+import { returnPropertyInputConfiguration } from '../../../Utility/PropertyInputConfiguration';
+
 
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
@@ -10,12 +10,45 @@ import * as errorHandlerActions from '../../../store/actions/errorHandlerActions
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 
+import { connect } from 'react-redux';
 
 class UpdateProperty extends Component {
     state = {  
         propertyForm: {},
         isFormValid: true
     }
+
+    componentWillMount() {
+        this.setState({ propertyForm: returnPropertyInputConfiguration() });
+    }
+
+    componentDidMount() {
+        let id = this.props.match.params.id; 
+        let url = 'api/property' + id;
+        // this.props.onGetPropertyById(url, {...this.props});
+    }
+
+    handleChangeEvent = (event, id) => {
+        const updatedPropertyForm = {...this.state.propertyForm};
+        this.setState({ propertyForm: updatedPropertyForm});
+    }
+
+    updateProperty = event => {
+        event.preventDefault();
+
+        const propertyToUpdate = {
+            propertyName: this.state.propertyForm.propertyName.value,
+            address: this.state.propertyForm.address.value,
+            city: this.state.propertyForm.city.value,
+            state: this.state.propertyForm.state.value,
+            zipCode: this.state.propertyForm.zipCode.value,
+        }
+
+        const url = '/api/property/' + this.props.data.id; 
+        this.props.onUpdateProperty(url, propertyToUpdate, {...this.props }); 
+    }
+
+
     render() { 
         return (  
             <div className="wrapper">
@@ -48,8 +81,8 @@ class UpdateProperty extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="address1" className="col-form-label">Address</label>
-                                        <input type="text" required value={this.state.propertyForm.address1} onChange={e => this.handleChangeEvent(e)} className="form-control" id="address1" />
+                                        <label htmlFor="address" className="col-form-label">Address</label>
+                                        <input type="text" required value={this.state.propertyForm.address} onChange={e => this.handleChangeEvent(e)} className="form-control" id="address1" />
                                     </div>
 
                                     <div className="form-row">
@@ -92,5 +125,26 @@ class UpdateProperty extends Component {
         );
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+        data: state.repository.data,
+        showSuccessModal: state.repository.showSuccessModal,
+        showErrorModal: state.errorHandler.showErrorModal,
+        errorMessage: state.errorHandler.errorMessage
+    }
+}
+
+const mapPropsToDispatch = dispatch => {
+    return {
+        ongetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onUpdateProperty: (url, property, props) => dispatch(repositoryActions.putData(url, property, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
+    }
+}
+
  
-export default UpdateProperty;
+export default connect(mapStateToProps, mapPropsToDispatch)(UpdateProperty);
+
