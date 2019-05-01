@@ -8,7 +8,8 @@ import UpdateTenant from './Tenants/UpdateTenant/UpdateTenant';
 import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import PropertyDetails from './Property/PropertyDetails/PropertyDetails';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
-import InternalServer from '../components/ErrorPages/InternalServer/InternalServer'
+import DeleteProperty from './Property/DeleteProperty/DeleteProperty'; 
+import InternalServer from '../components/ErrorPages/InternalServer/InternalServer';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/createProperty" component={CreateProperty} />
             <Route path="/propertyDetails/:id" component={PropertyDetails} /> 
             <Route path="/updateProperty/:id" component={UpdateProperty} />
+            <Route path="/deleteProperty/:id" component={DeleteProperty} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
