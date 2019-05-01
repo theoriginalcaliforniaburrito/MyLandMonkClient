@@ -24,7 +24,7 @@ const executeOtherError = (state, action) => {
 }
 
 const executeCloseErrorModal = (state, action) => {
-    return {
+    return{
         ...state,
         showErrorModal: false,
         errorMessage: ''

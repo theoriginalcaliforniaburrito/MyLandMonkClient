@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
-import { connect } from 'react-redux';
 
 class CreateProperty extends Component {
     state = {
@@ -16,34 +16,31 @@ class CreateProperty extends Component {
         }
     }
 
-    handleChangeEvent = (e) => {
-        let updatedForm = { ...this.state.propertyForm };
-        updatedForm[e.target.id] = e.target.value
-        
-        this.setState({
-            propertyForm : updatedForm
-        });
+    handleChangeEvent = (event) => {
+        const updatedPropertyForm = { ...this.state.propertyForm };
+        updatedPropertyForm[event.target.id] = event.target.value;
+
+        this.setState(
+            {
+                propertyForm: updatedPropertyForm
+            }
+        )
     }
 
-    createProperty = e => {
-        e.preventDefault();
-
+    createProperty = (event) => {
+        event.preventDefault();
+     
         const propertyToCreate = {
             propertyName: this.state.propertyForm.propertyName,
             address: this.state.propertyForm.address,
             city: this.state.propertyForm.city,
             state: this.state.propertyForm.state,
-            zipCode: this.state.propertyForm.zipCode
+            zipCode: this.state.propertyForm.zipCode,
         }
-
-        const url = '/api/property/';
-        this.props.onCreateProperty(url, propertyToCreate, {...this.props});
+     
+        const url = '/api/property';
+        this.props.onCreateProperty(url, propertyToCreate, { ...this.props });
     }
-
-    redirectToOwnerList = () => {
-        this.props.history.push('/property-list');
-    }
-
     render() {
         return (
             <div className="wrapper">
@@ -106,8 +103,8 @@ class CreateProperty extends Component {
                     </div >
 
                     <SuccessModal show={this.props.showSuccessModal}
-                        modalHeaderText={'Success'}
-                        modalBodyText={'New property created'}
+                        modalHeaderText={'Success message'}
+                        modalBodyText={'Action completed successfully'}
                         okButtonText={'OK'}
                         successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
 
@@ -117,6 +114,7 @@ class CreateProperty extends Component {
                         okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
                 </div>
             </div>
+
         );
     }
 }
@@ -129,12 +127,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapPropsToDispatch = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onCreateProperty: (url, property, props) => dispatch(repositoryActions.postData(url, property, props)),
-        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(CreateProperty);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProperty);
