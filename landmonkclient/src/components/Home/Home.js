@@ -11,7 +11,6 @@ const home = (props) => {
                 <Row>
                     <Col md={12}>
                         <div className={'homeText'}>
-                            Welcome! <br />
                             <img src={Logo} alt="LandMonk" height="400" />
                         </div>
                     </Col>
