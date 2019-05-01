@@ -1,7 +1,6 @@
-.home-body {
-    height: 100vh;
-    background-color: whitesmoke;
+.homeText {
     text-align: center;
-    font-size: 22px;
-    padding-top: 15px;
+    font-size: 32px;
+    top: 15px;
+    position: relative;
 }
