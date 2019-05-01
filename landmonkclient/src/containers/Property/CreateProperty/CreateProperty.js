@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import * as repositoryActions from '../../store/actions/repositoryActions';
-import * as errorHandlerActions from '../../store/actions/errorHandlerActions';
-import SuccessModal from '../../components/Modals/SuccessModal/SuccessModal';
-import ErrorModal from '../../components/Modals/ErrorModal/ErrorModal';
+import * as repositoryActions from '../../../store/actions/repositoryActions';
+import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 import { connect } from 'react-redux';
-import './CreateProperty.css';
-
-
 
 class CreateProperty extends Component {
     state = {
