@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row, Col, Table } from 'react-bootstrap';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
-import './PropertiesList.css';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import Property from '../../../components/PropertyComponents/Property/Property';
 
