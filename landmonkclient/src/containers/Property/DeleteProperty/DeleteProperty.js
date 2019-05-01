@@ -90,13 +90,13 @@ class DeleteProperty extends Component {
                         </div >
 
                         <SuccessModal show={this.props.showSuccessModal}
-                            modalHeaderText={'Success message'}
-                            modalBodyText={'Action completed successfully'}
+                            modalHeaderText={'Success!'}
+                            modalBodyText={'Property was deleted'}
                             okButtonText={'OK'}
                             successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
 
                         <ErrorModal show={this.props.showErrorModal}
-                            modalHeaderText={'Error message'}
+                            modalHeaderText={'Error!'}
                             modalBodyText={this.props.errorMessage.title || this.props.errorMessage}
                             okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
                     </div>
