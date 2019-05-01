@@ -16,7 +16,7 @@ export const getData = (url, props) => {
             dispatch(getDataSuccess(response.data));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props))
         })
     }
 }
@@ -54,7 +54,7 @@ export const putData = (url, obj, props) => {
             dispatch(putDataSuccess(response));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props))
         })
     }
 }
@@ -73,7 +73,7 @@ export const deleteData = (url, props) => {
             dispatch(deleteDataSuccess(response));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props))
         })
     }
 }
