@@ -2,8 +2,8 @@ import React from 'react';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import { Modal, Button } from 'react-bootstrap';
 import '../ModalStyles.css';
-
-const SuccessModal = (props) => {
+ 
+const successModal = (props) => {
     return (
         <Aux>
             <Modal show={props.show} backdrop='static'>
@@ -14,11 +14,11 @@ const SuccessModal = (props) => {
                     <p>{props.modalBodyText}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="success" onClick={props.successClick}>{props.okButtonText}</Button>
+                    <Button variant="success" onClick={props.successClick}>{props.okButtonText}</Button>
                 </Modal.Footer>
             </Modal>
         </Aux>
-    );
+    )
 }
-
-export default SuccessModal;
+ 
+export default successModal;

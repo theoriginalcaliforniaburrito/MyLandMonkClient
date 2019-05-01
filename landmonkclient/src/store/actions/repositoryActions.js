@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypes';
-import axios from '../../axios/axios';
-import * as errorHandlerActions from './errorHandlerActions';
+import * as actionTypes from './actionTypes'
+import * as errorHandlerActions from './errorHandlerActions'
+import axios from '../../axios/axios'
 
 const getDataSuccess = (data) => {
     return {
@@ -16,7 +16,7 @@ export const getData = (url, props) => {
             dispatch(getDataSuccess(response.data));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props));
         })
     }
 }
@@ -35,7 +35,7 @@ export const postData = (url, obj, props) => {
             dispatch(postDataSuccess(response));
         })
         .catch(error => {
-            dispatch(errorHandlerActions.handleHTTPError(error, props))
+            dispatch(errorHandlerActions.handleHTTPError(error, props));
         })
     }
 }
@@ -54,7 +54,7 @@ export const putData = (url, obj, props) => {
             dispatch(putDataSuccess(response));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props));
         })
     }
 }
@@ -73,12 +73,12 @@ export const deleteData = (url, props) => {
             dispatch(deleteDataSuccess(response));
         })
         .catch(error => {
-            //TODO: handle the error when implemented
+            dispatch(errorHandlerActions.handleHTTPError(error, props));
         })
     }
 }
 
-export const closeSuccessModal = (url, props) => {
+export const closeSuccessModal = (props, url) =>{
     return {
         type: actionTypes.CLOSE_SUCCESS_MODAL,
         props: props,
