@@ -59,8 +59,8 @@ class DeleteProperty extends Component {
                                             </div>
 
                                             <div className="form-group">
-                                                <label htmlFor="address1" className="col-form-label">Address</label>
-                                                <input type="text" value={property.address1} className="form-control" id="address1" />
+                                                <label htmlFor="address" className="col-form-label">Address</label>
+                                                <input type="text" value={property.address} className="form-control" id="address" />
                                             </div>
 
                                             <div className="form-row">
@@ -119,7 +119,7 @@ const mapPropsToDispatch = dispatch => {
     return {
         onGetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
         onDeleteProperty: (url, props) => dispatch(repositoryActions.deleteData(url, props)),
-        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }
