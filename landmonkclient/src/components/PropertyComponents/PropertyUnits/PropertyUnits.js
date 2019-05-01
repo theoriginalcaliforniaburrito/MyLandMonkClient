@@ -1,5 +1,4 @@
 import React from 'react';
-import Moment from 'react-moment';
 
 const propertyUnits = props => {
     let units = null;
@@ -7,8 +6,10 @@ const propertyUnits = props => {
         units = props.units.map(unit => {
             return (
                 <tr key={unit.id}>
-                    <td>{unit.unitType}</td>
-                    <td><Moment format="DD/MM/YYYY">{unit.dateCreated}</Moment></td>
+                    <td>{unit.unitName}</td>
+                    <td>{unit.bedroomCount}</td>
+                    <td>{unit.bathroomCount}</td>
+                    <td>{unit.squareFootage}</td>
                 </tr>
             );
         })
@@ -20,7 +21,7 @@ const propertyUnits = props => {
 
                 <div className="table-responsive">
                     <table className="table table-striped mb-0">
-                        <thead>
+                        <thead> 
                             <tr>
                                 <th>Unit Name</th>
                                 <th>Beds</th>
