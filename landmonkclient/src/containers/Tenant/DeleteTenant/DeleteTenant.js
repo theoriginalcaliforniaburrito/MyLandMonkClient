@@ -4,7 +4,7 @@ import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
-
+import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
 
 class DeleteTenant extends Component {
     state = {
@@ -117,6 +117,9 @@ class DeleteTenant extends Component {
 
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-4">
+                            <img src={Logo} alt="LandMonk" />
                         </div>
                     </div >
 

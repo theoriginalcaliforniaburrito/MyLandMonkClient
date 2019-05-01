@@ -4,6 +4,7 @@ import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
 
 class CreateProperty extends Component {
     state = {
@@ -29,7 +30,7 @@ class CreateProperty extends Component {
 
     createProperty = (event) => {
         event.preventDefault();
-     
+
         const propertyToCreate = {
             propertyName: this.state.propertyForm.propertyName,
             address: this.state.propertyForm.address,
@@ -37,7 +38,7 @@ class CreateProperty extends Component {
             state: this.state.propertyForm.state,
             zipCode: this.state.propertyForm.zipCode,
         }
-     
+
         const url = '/api/property';
         this.props.onCreateProperty(url, propertyToCreate, { ...this.props });
     }
@@ -100,6 +101,11 @@ class CreateProperty extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="col-4">
+                            <img src={Logo} alt="LandMonk" />
+                        </div>
+
                     </div >
 
                     <SuccessModal show={this.props.showSuccessModal}

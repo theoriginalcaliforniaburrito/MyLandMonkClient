@@ -4,6 +4,7 @@ import * as errorHandlerActions from '../../../store/actions/errorHandlerActions
 import { connect } from 'react-redux';
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
 
 class UpdateProperty extends Component {
     state = {
@@ -118,6 +119,10 @@ class UpdateProperty extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div className="col-4">
+                            <img src={Logo} alt="LandMonk" />
+                        </div>
+
                     </div >
 
                     <SuccessModal show={this.props.showSuccessModal}

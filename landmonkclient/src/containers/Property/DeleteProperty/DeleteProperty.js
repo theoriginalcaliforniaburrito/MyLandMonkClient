@@ -5,6 +5,7 @@ import * as errorHandlerActions from '../../../store/actions/errorHandlerActions
 import { connect } from 'react-redux';
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
 
 class DeleteProperty extends Component {
 
@@ -85,7 +86,10 @@ class DeleteProperty extends Component {
                                         </form>
 
                                     </div>
-                                </div> 
+                                </div>
+                            </div>
+                            <div className="col-4">
+                                <img src={Logo} alt="LandMonk" />
                             </div>
                         </div >
 

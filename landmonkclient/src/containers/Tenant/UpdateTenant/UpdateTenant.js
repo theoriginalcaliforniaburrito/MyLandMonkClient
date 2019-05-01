@@ -4,7 +4,7 @@ import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
-
+import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
 
 class EditTenant extends Component {
     state = {
@@ -24,10 +24,10 @@ class EditTenant extends Component {
 
     handleChangeEvent = (e) => {
         const updatedTenantForm = { ...this.state.tenantForm };
-        updatedTenantForm[e.target.id] =  e.target.value
-        this.setState({ tenantForm: updatedTenantForm});
+        updatedTenantForm[e.target.id] = e.target.value
+        this.setState({ tenantForm: updatedTenantForm });
     }
-    
+
     componentWillReceiveProps = (nextProps) => {
         const updatedTenantForm = { ...this.state.tenantForm };
 
@@ -35,7 +35,7 @@ class EditTenant extends Component {
         updatedTenantForm.lastName = nextProps.data.lastName;
         updatedTenantForm.email = nextProps.data.email;
         updatedTenantForm.cellPhone = nextProps.data.cellPhone;
-        
+
         this.setState({ tenantForm: updatedTenantForm });
     }
 
@@ -115,6 +115,9 @@ class EditTenant extends Component {
 
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-4">
+                            <img src={Logo} alt="LandMonk" />
                         </div>
                     </div >
 
