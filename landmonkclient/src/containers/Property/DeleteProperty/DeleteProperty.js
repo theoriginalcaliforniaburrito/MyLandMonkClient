@@ -22,7 +22,7 @@ class DeleteProperty extends Component {
     }
 
     redirectToPropertyList = () => {
-        this.props.history.push('/property-list');
+        this.props.history.push('/properties');
     }
 
     render() {
