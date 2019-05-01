@@ -14,7 +14,7 @@ const successModal = (props) => {
                     <p>{props.modalBodyText}</p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle="success" onClick={props.successClick}>{props.okButtonText}</Button>
+                    <Button variant="success" onClick={props.successClick}>{props.okButtonText}</Button>
                 </Modal.Footer>
             </Modal>
         </Aux>

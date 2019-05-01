@@ -7,12 +7,12 @@ const initialState = {
 
 const execute404 = (state, action) => {
     action.props.history.push('/404');
-    return {...state};
+    return { ...state };
 }
 
 const execute500 = (state, action) => {
     action.props.history.push('/500');
-    return {...state};
+    return { ...state };
 }
 
 const executeOtherError = (state, action) => {
@@ -24,8 +24,8 @@ const executeOtherError = (state, action) => {
 }
 
 const executeCloseErrorModal = (state, action) => {
-    return {
-        ...state, 
+    return{
+        ...state,
         showErrorModal: false,
         errorMessage: ''
     }
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
             return execute500(state, action);
         case actionTypes.HTTP_OTHER_ERROR:
             return executeOtherError(state, action);
-        case actionTypes.CLOSE_ERROR_MODAL: 
+        case actionTypes.CLOSE_ERROR_MODAL:
             return executeCloseErrorModal(state, action);
         default:
             return state;
