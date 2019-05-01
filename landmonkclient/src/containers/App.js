@@ -6,11 +6,12 @@ import Layout from '../components/Layout/Layout';
 import PropertyList from '../containers/Property/PropertyList/PropertyList';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
 import UpdateTenant from './Tenant/UpdateTenant/UpdateTenant';
-import NotFound from '../components/ErrorPages/NotFound/NotFound';
+import CreateTenant from './Tenant/CreateTenant/CreateTenant';
 import TenantList from './Tenant/TenantList/TenantList';
 import PropertyDetails from './Property/PropertyDetails/PropertyDetails';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 import DeleteProperty from './Property/DeleteProperty/DeleteProperty'; 
+import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import InternalServer from '../components/ErrorPages/InternalServer/InternalServer';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />
+            <Route path="/createTenant/" component={CreateTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
 

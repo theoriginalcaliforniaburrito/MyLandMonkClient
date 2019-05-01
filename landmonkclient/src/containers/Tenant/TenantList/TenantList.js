@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Tenant from '../../../components/TenantComponents/Tenant/Tenant'
 import { connect } from 'react-redux'
 import * as repositoryActions from '../../../store/actions/repositoryActions'
-// import Owner from '../../../components/OwnerComponents/Owner/Owner';
 
 class TenantList extends Component {
 
