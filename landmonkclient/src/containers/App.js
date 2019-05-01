@@ -20,12 +20,15 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/createProperty" component={CreateProperty} />
-            <Route path="/propertyDetails/:id" component={PropertyDetails} /> 
+            <Route path="/propertyDetails/:id" component={PropertyDetails} />
+            <Route path="/tenant-list" component={TenantList} />
+
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
+
           </Switch>
         </Layout>
       </BrowserRouter>
