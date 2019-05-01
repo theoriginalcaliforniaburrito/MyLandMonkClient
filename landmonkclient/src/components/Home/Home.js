@@ -4,15 +4,18 @@ import './Home.css';
 
 const home = (props) => {
     return (
-        <Row>
-            <Col md={12}>
-                <div className={'homeText'}>
-                    <div className="home-body">
-                        Welcome to LandMonk Application!
-                    </div>
+        <div className="wrapper">
+            <div className="container-fluid">
+
+                <Row>
+                    <Col md={12}>
+                        <div className={'homeText'}>
+                            Welcome to LandMonk Application!
                 </div>
-            </Col>
-        </Row>
+                    </Col>
+                </Row>
+            </div>
+        </div>
     );
 }
 

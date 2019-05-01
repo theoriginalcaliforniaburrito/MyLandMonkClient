@@ -3,7 +3,7 @@ import Aux from '../../../hoc/Auxiliary/Auxiliary';
 import { Modal, Button } from 'react-bootstrap';
 import '../ModalStyles.css';
  
-const errorModal = (props) => {
+const ErrorModal = (props) => {
     return (
         <Aux>
             <Modal show={props.show} backdrop='static'>
@@ -21,4 +21,4 @@ const errorModal = (props) => {
     )
 }
  
-export default errorModal;
+export default ErrorModal;
