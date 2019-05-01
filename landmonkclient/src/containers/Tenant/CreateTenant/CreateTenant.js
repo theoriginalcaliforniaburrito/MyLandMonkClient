@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
-import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 
-
-class EditTenant extends Component {
+class CreateTenant extends Component {
     state = {
         tenantForm: {
             firstName: '',
@@ -16,45 +15,29 @@ class EditTenant extends Component {
         }
     }
 
-    componentDidMount() {
-        let id = this.props.match.params.id;
-        let url = '/api/tenant/' + id;
-        this.props.onGetTenantById(url, { ...this.props });
+    handleChangeEvent = (event) => {
+        const createTenantForm = { ...this.state.tenantForm };
+        createTenantForm[event.target.id] = event.target.value;
+
+        this.setState(
+            {
+                tenantForm: createTenantForm
+            }
+        )
     }
 
-    handleChangeEvent = (e) => {
-        const updatedTenantForm = { ...this.state.tenantForm };
-        updatedTenantForm[e.target.id] =  e.target.value
-        this.setState({ tenantForm: updatedTenantForm});
-    }
-    
-    componentWillReceiveProps = (nextProps) => {
-        const updatedTenantForm = { ...this.state.tenantForm };
-
-        updatedTenantForm.firstName = nextProps.data.firstName;
-        updatedTenantForm.lastName = nextProps.data.lastName;
-        updatedTenantForm.email = nextProps.data.email;
-        updatedTenantForm.cellPhone = nextProps.data.cellPhone;
-        
-        this.setState({ tenantForm: updatedTenantForm });
-    }
-
-    updateTenant = (event) => {
+    createTenant = (event) => {
         event.preventDefault();
-
-        const tenantToUpdate = {
+     
+        const tenantToCreate = {
             firstName: this.state.tenantForm.firstName,
             lastName: this.state.tenantForm.lastName,
             email: this.state.tenantForm.email,
-            cellPhone: this.state.tenantForm.cellPhone,
+            cellPhone: this.state.tenantForm.cellPhone
         }
-
-        const url = '/api/tenant/' + this.props.data.id;
-        this.props.onUpdateTenant(url, tenantToUpdate, { ...this.props });
-    }
-
-    redirectToOwnerList = () => {
-        this.props.history.push('/tenant-list');
+     
+        const url = '/api/tenant';
+        this.props.onCreateTenant(url, tenantToCreate, { ...this.props });
     }
 
     render() {
@@ -66,7 +49,7 @@ class EditTenant extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box">
-                                <h4 className="page-title">Edit Tenant</h4>
+                                <h4 className="page-title">Create Tenant</h4>
                             </div>
                         </div>
                     </div>
@@ -79,7 +62,7 @@ class EditTenant extends Component {
                                 <div className="card-body">
                                     <h4 className="header-title">Tenant Info</h4>
 
-                                    <form onSubmit={e => this.updateTenant(e)}>
+                                    <form onSubmit={e => this.createTenant(e)}>
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="firstName" className="col-form-label">First Name</label>
@@ -109,7 +92,7 @@ class EditTenant extends Component {
                                             </div>
                                         </div>
 
-                                        <button type="submit" className="btn btn-primary waves-effect waves-light">Update</button>
+                                        <button type="submit" className="btn btn-primary waves-effect waves-light">Create</button>
 
                                     </form>
 
@@ -120,9 +103,9 @@ class EditTenant extends Component {
 
                     <SuccessModal show={this.props.showSuccessModal}
                         modalHeaderText={'Success!'}
-                        modalBodyText={'Tenant updated'}
+                        modalBodyText={'Tenant created'}
                         okButtonText={'OK'}
-                        successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
+                        successClick={() => this.props.onCloseSuccessModal('/tenant', { ...this.props })} />
 
                     <ErrorModal show={this.props.showErrorModal}
                         modalHeaderText={'Error!'}
@@ -136,7 +119,6 @@ class EditTenant extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        data: state.repository.data,
         showSuccessModal: state.repository.showSuccessModal,
         showErrorModal: state.errorHandler.showErrorModal,
         errorMessage: state.errorHandler.errorMessage
@@ -145,11 +127,10 @@ const mapStateToProps = (state) => {
 
 const mapPropsToDispatch = dispatch => {
     return {
-        onGetTenantById: (url, props) => dispatch(repositoryActions.getData(url, props)),
-        onUpdateTenant: (url, tenant, props) => dispatch(repositoryActions.putData(url, tenant, props)),
+        onCreateTenant: (url, tenant, props) => dispatch(repositoryActions.postData(url, tenant, props)),
         onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(EditTenant);
+export default connect(mapStateToProps, mapPropsToDispatch)(CreateTenant);

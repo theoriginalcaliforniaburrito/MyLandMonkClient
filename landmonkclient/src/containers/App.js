@@ -1,15 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
+import PropertyList from '../containers/Property/PropertyList/PropertyList';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
-import UpdateTenant from './Tenants/UpdateTenant/UpdateTenant';
-import DeleteTenant from './Tenants/DeleteTenant/DeleteTenant';
-import NotFound from '../components/ErrorPages/NotFound/NotFound';
+import DeleteTenant from './Tenant/DeleteTenant/DeleteTenant';
+import UpdateTenant from './Tenant/UpdateTenant/UpdateTenant';
+import CreateTenant from './Tenant/CreateTenant/CreateTenant';
+import TenantList from './Tenant/TenantList/TenantList';
 import PropertyDetails from './Property/PropertyDetails/PropertyDetails';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 import DeleteProperty from './Property/DeleteProperty/DeleteProperty'; 
+import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import InternalServer from '../components/ErrorPages/InternalServer/InternalServer';
 
 class App extends Component {
@@ -19,10 +22,13 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/properties" component={PropertyList} />
             <Route path="/createProperty" component={CreateProperty} />
-            <Route path="/propertyDetails/:id" component={PropertyDetails} /> 
+            <Route path="/propertyDetails/:id" component={PropertyDetails} />
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
+            <Route path="/tenants" component={TenantList} />
+            <Route path="/createTenant/" component={CreateTenant} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />
             <Route path="/deleteTenant/:id" component={DeleteTenant} />
             <Route path="/500" component={InternalServer} />
