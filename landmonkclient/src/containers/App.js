@@ -5,6 +5,7 @@ import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
 import PropertyList from '../containers/Property/PropertyList/PropertyList';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
+import DeleteTenant from './Tenant/DeleteTenant/DeleteTenant';
 import UpdateTenant from './Tenant/UpdateTenant/UpdateTenant';
 import CreateTenant from './Tenant/CreateTenant/CreateTenant';
 import TenantList from './Tenant/TenantList/TenantList';
@@ -24,14 +25,14 @@ class App extends Component {
             <Route path="/properties" component={PropertyList} />
             <Route path="/createProperty" component={CreateProperty} />
             <Route path="/propertyDetails/:id" component={PropertyDetails} />
-            <Route path="/tenants" component={TenantList} />
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
-            <Route path="/updateTenant/:id" component={UpdateTenant} />
+            <Route path="/tenants" component={TenantList} />
             <Route path="/createTenant/" component={CreateTenant} />
+            <Route path="/updateTenant/:id" component={UpdateTenant} />
+            <Route path="/deleteTenant/:id" component={DeleteTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
-
           </Switch>
         </Layout>
       </BrowserRouter>

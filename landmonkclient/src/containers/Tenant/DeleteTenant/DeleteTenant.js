@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
-import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
-import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 
-class CreateTenant extends Component {
+
+class DeleteTenant extends Component {
     state = {
         tenantForm: {
             firstName: '',
@@ -15,29 +16,45 @@ class CreateTenant extends Component {
         }
     }
 
-    handleChangeEvent = (event) => {
-        const createTenantForm = { ...this.state.tenantForm };
-        createTenantForm[event.target.id] = event.target.value;
-
-        this.setState(
-            {
-                tenantForm: createTenantForm
-            }
-        )
+    componentDidMount() {
+        let id = this.props.match.params.id;
+        let url = '/api/tenant/' + id;
+        this.props.onGetTenantById(url, { ...this.props });
     }
 
-    createTenant = (event) => {
+    handleChangeEvent = (e) => {
+        const deletedTenantForm = { ...this.state.tenantForm };
+        deletedTenantForm[e.target.id] = e.target.value
+        this.setState({ tenantForm: deletedTenantForm });
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        const deletedTenantForm = { ...this.state.tenantForm };
+
+        deletedTenantForm.firstName = nextProps.data.firstName;
+        deletedTenantForm.lastName = nextProps.data.lastName;
+        deletedTenantForm.email = nextProps.data.email;
+        deletedTenantForm.cellPhone = nextProps.data.cellPhone;
+
+        this.setState({ tenantForm: deletedTenantForm });
+    }
+
+    updateTenant = (event) => {
         event.preventDefault();
-     
-        const tenantToCreate = {
+
+        const tenantToUpdate = {
             firstName: this.state.tenantForm.firstName,
             lastName: this.state.tenantForm.lastName,
             email: this.state.tenantForm.email,
-            cellPhone: this.state.tenantForm.cellPhone
+            cellPhone: this.state.tenantForm.cellPhone,
         }
-     
-        const url = '/api/tenant';
-        this.props.onCreateTenant(url, tenantToCreate, { ...this.props });
+
+        const url = '/api/tenant/' + this.props.data.id;
+        this.props.onUpdateTenant(url, tenantToUpdate, { ...this.props });
+    }
+
+    redirectToTenantList = () => {
+        this.props.history.push('/tenants');
     }
 
     render() {
@@ -49,7 +66,7 @@ class CreateTenant extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box">
-                                <h4 className="page-title">Create Tenant</h4>
+                                <h4 className="page-title">Delete Tenant</h4>
                             </div>
                         </div>
                     </div>
@@ -62,7 +79,7 @@ class CreateTenant extends Component {
                                 <div className="card-body">
                                     <h4 className="header-title">Tenant Info</h4>
 
-                                    <form onSubmit={e => this.createTenant(e)}>
+                                    <form onSubmit={e => this.updateTenant(e)}>
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="firstName" className="col-form-label">First Name</label>
@@ -92,7 +109,9 @@ class CreateTenant extends Component {
                                             </div>
                                         </div>
 
-                                        <button type="submit" className="btn btn-primary waves-effect waves-light">Create</button>
+                                        <button className="btn btn-info waves-effect waves-light" onClick={this.redirectToTenantList}>Cancel</button>
+
+                                        <button type="submit" className="btn btn-danger waves-effect waves-light">Delete</button>
 
                                     </form>
 
@@ -103,9 +122,9 @@ class CreateTenant extends Component {
 
                     <SuccessModal show={this.props.showSuccessModal}
                         modalHeaderText={'Success!'}
-                        modalBodyText={'Tenant created'}
+                        modalBodyText={'Tenant Deleted'}
                         okButtonText={'OK'}
-                        successClick={() => this.props.onCloseSuccessModal('/tenant', { ...this.props })} />
+                        successClick={() => this.props.onCloseSuccessModal('/tenants', { ...this.props })} />
 
                     <ErrorModal show={this.props.showErrorModal}
                         modalHeaderText={'Error!'}
@@ -119,6 +138,7 @@ class CreateTenant extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        data: state.repository.data,
         showSuccessModal: state.repository.showSuccessModal,
         showErrorModal: state.errorHandler.showErrorModal,
         errorMessage: state.errorHandler.errorMessage
@@ -127,10 +147,11 @@ const mapStateToProps = (state) => {
 
 const mapPropsToDispatch = dispatch => {
     return {
-        onCreateTenant: (url, tenant, props) => dispatch(repositoryActions.postData(url, tenant, props)),
+        onGetTenantById: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onUpdateTenant: (url, tenant, props) => dispatch(repositoryActions.deleteData(url, tenant, props)),
         onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(CreateTenant);
+export default connect(mapStateToProps, mapPropsToDispatch)(DeleteTenant);

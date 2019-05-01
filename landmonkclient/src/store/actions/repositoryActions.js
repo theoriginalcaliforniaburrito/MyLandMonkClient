@@ -8,7 +8,7 @@ const getDataSuccess = (data) => {
         data: data
     }
 }
- 
+
 export const getData = (url, props) => {
     return (dispatch) => {
         axios.get(url)

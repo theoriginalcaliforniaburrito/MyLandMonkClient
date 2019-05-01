@@ -54,7 +54,7 @@ class EditTenant extends Component {
     }
 
     redirectToOwnerList = () => {
-        this.props.history.push('/tenant-list');
+        this.props.history.push('/');
     }
 
     render() {
