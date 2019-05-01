@@ -15,7 +15,7 @@ class PropertyDetails extends Component {
     }
  
     render() { 
-        const property = this.props.data;
+        let property = { ...this.props.data };
 
         return ( 
             <Aux>
