@@ -5,6 +5,8 @@ import './Navigation.css';
 // import { LinkContainer } from 'react-router-bootstrap';
 import TopNavLogo from './TopNavLogo/TopNavLogo';
 import NavBar from './NavBar/NavBar';
+// import PropertiesList from '../containers/Properties/PopertiesList/PropertiesList';
+
 
 
 
@@ -17,6 +19,7 @@ const navigation = (props) => {
             <div>
                 <NavBar />
             </div>
+            <div></div>
         </div>
     )
 }
