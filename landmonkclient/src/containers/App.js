@@ -8,7 +8,6 @@ import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 import InternalServer from '../components/ErrorPages/InternalServer/InternalServer'
 
-
 function App() {
   return (
     <BrowserRouter>
