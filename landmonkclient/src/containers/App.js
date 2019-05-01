@@ -4,10 +4,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
-import EditTenant from './Tenants/UpdateTenant/UpdateTenant';
+import UpdateTenant from './Tenants/UpdateTenant/UpdateTenant';
 import NotFound from '../components/ErrorPages/NotFound/NotFound';
+import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 import InternalServer from '../components/ErrorPages/InternalServer/InternalServer'
-
 
 class App extends Component {
   render() {
@@ -17,7 +17,8 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/createProperty" component={CreateProperty} />
-            <Route path="/updateTenant/:id" component={EditTenant} />
+            <Route path="/updateProperty/:id" component={UpdateProperty} />
+            <Route path="/updateTenant/:id" component={UpdateTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
           </Switch>
