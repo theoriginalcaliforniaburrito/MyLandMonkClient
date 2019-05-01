@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import Aux from '../../../hoc/Auxiliary/Auxiliary';
-import * as repositoryActions from '../../../store/actions/repositoryActions';
-import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
-import { connect } from 'react-redux';
 import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
 import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
+import { connect } from 'react-redux';
+import * as repositoryActions from '../../../store/actions/repositoryActions';
+import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
+
 
 class DeleteTenant extends Component {
+    state = {
+        tenantForm: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            cellPhone: ''
+        }
+    }
 
     componentDidMount() {
         let id = this.props.match.params.id;
@@ -14,11 +22,35 @@ class DeleteTenant extends Component {
         this.props.onGetTenantById(url, { ...this.props });
     }
 
-    deleteTenant = (event) => {
+    handleChangeEvent = (e) => {
+        const deletedTenantForm = { ...this.state.tenantForm };
+        deletedTenantForm[e.target.id] = e.target.value
+        this.setState({ tenantForm: deletedTenantForm });
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        const deletedTenantForm = { ...this.state.tenantForm };
+
+        deletedTenantForm.firstName = nextProps.data.firstName;
+        deletedTenantForm.lastName = nextProps.data.lastName;
+        deletedTenantForm.email = nextProps.data.email;
+        deletedTenantForm.cellPhone = nextProps.data.cellPhone;
+
+        this.setState({ tenantForm: deletedTenantForm });
+    }
+
+    updateTenant = (event) => {
         event.preventDefault();
 
+        const tenantToUpdate = {
+            firstName: this.state.tenantForm.firstName,
+            lastName: this.state.tenantForm.lastName,
+            email: this.state.tenantForm.email,
+            cellPhone: this.state.tenantForm.cellPhone,
+        }
+
         const url = '/api/tenant/' + this.props.data.id;
-        this.props.onDeleteTenant(url, { ...this.props });
+        this.props.onUpdateTenant(url, tenantToUpdate, { ...this.props });
     }
 
     redirectToTenantList = () => {
@@ -26,82 +58,80 @@ class DeleteTenant extends Component {
     }
 
     render() {
-        let tenant = { ...this.props.data };
-
         return (
-            <Aux>
-                <div className="wrapper">
-                    <div className="container-fluid">
+            <div className="wrapper">
+                <div className="container-fluid">
 
-                        {/* <!-- start page title --> */}
-                        <div className="row">
-                            <div className="col-12">
-                                <div className="page-title-box">
-                                    <h4 className="page-title">Delete a Tenant</h4>
+                    {/* <!-- start page title --> */}
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="page-title-box">
+                                <h4 className="page-title">Edit Tenant</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {/* <!-- end page title --> */}
+
+
+                    <div className="row">
+                        <div className="col-8">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h4 className="header-title">Tenant Info</h4>
+
+                                    <form onSubmit={e => this.updateTenant(e)}>
+                                        <div className="form-row">
+                                            <div className="form-group col-md-6">
+                                                <label htmlFor="firstName" className="col-form-label">First Name</label>
+                                                <input type="text" required
+                                                    value={this.state.tenantForm.firstName} onChange={e => this.handleChangeEvent(e)} className="form-control" id="firstName" />
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label htmlFor="lastName" className="col-form-label">Last Name</label>
+                                                <input type="text" required
+                                                    value={this.state.tenantForm.lastName} onChange={e => this.handleChangeEvent(e)} className="form-control" id="lastName" />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-row">
+                                            <div className="form-group col-md-6">
+                                                <label htmlFor="email" className="col-form-label">email</label>
+                                                <input type="text" required
+                                                    value={this.state.tenantForm.email} onChange={e => this.handleChangeEvent(e)} className="form-control" id="email" />
+                                            </div>
+                                        </div>
+
+                                        <div className="form-row">
+                                            <div className="form-group col-md-6">
+                                                <label htmlFor="cellPhone" className="col-form-label">Cell Phone</label>
+                                                <input type="text" required
+                                                    value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="cellPhone" />
+                                            </div>
+                                        </div>
+
+                                        <button className="btn btn-info waves-effect waves-light" onClick={this.redirectToTenantList}>Cancel</button>
+
+                                        <button type="submit" className="btn btn-danger waves-effect waves-light">Delete</button>
+
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- end page title --> */}
+                    </div >
 
-                        <div className="row">
-                            <div className="col-8">
-                                <div className="card">
-                                    <div className="card-body">
-                                        <h4 className="header-title">Basic Information</h4>
+                    <SuccessModal show={this.props.showSuccessModal}
+                        modalHeaderText={'Success!'}
+                        modalBodyText={'Tenant Deleted'}
+                        okButtonText={'OK'}
+                        successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
 
-                                        <form onSubmit={e => this.deleteTenant(e)}>
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="tenantName" className="col-form-label">Tenant Name</label>
-                                                    <input type="text"
-                                                        value={tenant.tenantName} className="form-control" id="tenantName" />
-                                                </div>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="address" className="col-form-label">Address</label>
-                                                <input type="text" value={tenant.address} className="form-control" id="address" />
-                                            </div>
-
-                                            <div className="form-row">
-                                                <div className="form-group col-md-6">
-                                                    <label htmlFor="city" className="col-form-label">City</label>
-                                                    <input type="text" value={tenant.city} className="form-control" id="city" />
-                                                </div>
-                                                <div className="form-group col-md-2">
-                                                    <label htmlFor="state" className="col-form-label">State</label>
-                                                    <input type="text" value={tenant.state} className="form-control" id="state" />
-                                                </div>
-                                                <div className="form-group col-md-4">
-                                                    <label htmlFor="zipCode" className="col-form-label">Zip</label>
-                                                    <input type="text" value={tenant.zipCode} className="form-control" id="zipCode" />
-                                                </div>
-                                            </div>
-
-                                            <button className="btn btn-info waves-effect waves-light" onClick={this.redirectToTenantList}>Cancel</button>
-
-                                            <button type="submit" className="btn btn-danger waves-effect waves-light">Delete</button>
-
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div >
-
-                        <SuccessModal show={this.props.showSuccessModal}
-                            modalHeaderText={'Success message'}
-                            modalBodyText={'Action completed successfully'}
-                            okButtonText={'OK'}
-                            successClick={() => this.props.onCloseSuccessModal('/tenants', { ...this.props })} />
-
-                        <ErrorModal show={this.props.showErrorModal}
-                            modalHeaderText={'Error message'}
-                            modalBodyText={this.props.errorMessage.title || this.props.errorMessage}
-                            okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
-                    </div>
+                    <ErrorModal show={this.props.showErrorModal}
+                        modalHeaderText={'Error!'}
+                        modalBodyText={this.props.errorMessage.title || this.props.errorMessage}
+                        okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
                 </div>
-            </Aux>
+            </div>
         );
     }
 }
@@ -118,7 +148,7 @@ const mapStateToProps = (state) => {
 const mapPropsToDispatch = dispatch => {
     return {
         onGetTenantById: (url, props) => dispatch(repositoryActions.getData(url, props)),
-        onDeleteTenant: (url, props) => dispatch(repositoryActions.deleteData(url, props)),
+        onUpdateTenant: (url, tenant, props) => dispatch(repositoryActions.deleteData(url, tenant, props)),
         onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }

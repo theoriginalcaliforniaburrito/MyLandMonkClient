@@ -85,7 +85,7 @@ class DeleteProperty extends Component {
                                         </form>
 
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </div >
 

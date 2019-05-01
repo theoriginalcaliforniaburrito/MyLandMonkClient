@@ -5,6 +5,7 @@ import Home from '../components/Home/Home';
 import Layout from '../components/Layout/Layout';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
 import UpdateTenant from './Tenants/UpdateTenant/UpdateTenant';
+import DeleteTenant from './Tenants/DeleteTenant/DeleteTenant';
 import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import PropertyDetails from './Property/PropertyDetails/PropertyDetails';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />
+            <Route path="/deleteTenant/:id" component={DeleteTenant} />
             <Route path="/500" component={InternalServer} />
             <Route path="*" component={NotFound} />
           </Switch>
