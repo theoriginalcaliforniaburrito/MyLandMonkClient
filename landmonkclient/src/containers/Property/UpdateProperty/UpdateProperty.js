@@ -170,7 +170,7 @@ const mapPropsToDispatch = dispatch => {
     return {
         onGetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
         onUpdateProperty: (url, property, props) => dispatch(repositoryActions.putData(url, property, props)),
-        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }

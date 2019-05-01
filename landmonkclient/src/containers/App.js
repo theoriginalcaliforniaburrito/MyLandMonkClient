@@ -8,20 +8,22 @@ import NotFound from '../components/ErrorPages/NotFound/NotFound';
 import UpdateProperty from './Property/UpdateProperty/UpdateProperty';  
 import InternalServer from '../components/ErrorPages/InternalServer/InternalServer'
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Layout>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/updateProperty/:id" component={UpdateProperty} />
-          <Route path="/createProperty" exact component={CreateProperty} />
-          <Route path="/500" component={InternalServer} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Layout>
-    </BrowserRouter>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Layout>
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/updateProperty/:id" component={UpdateProperty} />
+            <Route path="/createProperty" component={CreateProperty} />
+            <Route path="/500" component={InternalServer} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Layout>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
