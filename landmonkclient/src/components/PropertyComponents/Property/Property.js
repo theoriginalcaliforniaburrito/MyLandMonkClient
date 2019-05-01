@@ -16,6 +16,7 @@ const redirectToDeleteProperty = (id, history) => {
 }
  
 const property = (props) => {
+    console.log(props)
     return (
         <Aux>
             <div className="row">
@@ -28,7 +29,7 @@ const property = (props) => {
                                     <div className="media-body">
                                         <h4 className="mt-0 mb-2 font-16">{props.property.propertyName}</h4>
                                         <p className="mb-1">Single-Family Home</p>
-                                        <p className="mb-0">{`${props.property.address1}, ${props.property.city}, ${props.property.state} ${props.property.zipCode}`}</p>
+                                        <p className="mb-0">{`${props.property.address}, ${props.property.city}, ${props.property.state} ${props.property.zipCode}`}</p>
                                     </div>
                                 </div>
                             </div>

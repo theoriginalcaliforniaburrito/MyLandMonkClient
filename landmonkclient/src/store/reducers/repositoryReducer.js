@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes'
 
 const initialState = {
     data: null,
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DELETE_DATA_SUCCESS:
             return executeDeleteDataSuccess(state, action);
         case actionTypes.CLOSE_SUCCESS_MODAL:
-            return executeCloseSuccessModal(state, action);
+            return executeCloseSuccessModal(state, action)
         default:
             return state;
     }

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import * as repositoryActions from '../../store/actions/repositoryActions';
-import * as errorHandlerActions from '../../store/actions/errorHandlerActions';
-import SuccessModal from '../../components/Modals/SuccessModal/SuccessModal';
-import ErrorModal from '../../components/Modals/ErrorModal/ErrorModal';
+import * as repositoryActions from '../../../store/actions/repositoryActions';
+import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 import { connect } from 'react-redux';
-import './CreateProperty.css';
+import SuccessModal from '../../../components/Modals/SuccessModal/SuccessModal';
+import ErrorModal from '../../../components/Modals/ErrorModal/ErrorModal';
 
-
-
-class CreateProperty extends Component {
+class UpdateProperty extends Component {
     state = {
         propertyForm: {
             propertyName: '',
@@ -19,34 +16,49 @@ class CreateProperty extends Component {
         }
     }
 
-    handleChangeEvent = (e) => {
-        let updatedForm = { ...this.state.propertyForm };
-        updatedForm[e.target.id] = e.target.value
-        
-        this.setState({
-            propertyForm : updatedForm
-        });
+    componentDidMount = () => {
+        const id = this.props.match.params.id;
+        const url = '/api/property/' + id;
+        this.props.onGetPropertyById(url, { ...this.props });
     }
 
-    createProperty = e => {
-        e.preventDefault();
+    componentWillReceiveProps = (nextProps) => {
+        const updatedPropertyForm = { ...this.state.propertyForm };
 
-        const propertyToCreate = {
+        updatedPropertyForm.propertyName = nextProps.data.propertyName;
+        updatedPropertyForm.address = nextProps.data.address;
+        updatedPropertyForm.city = nextProps.data.city;
+        updatedPropertyForm.state = nextProps.data.state;
+        updatedPropertyForm.zipCode = nextProps.data.zipCode;
+        this.setState({ propertyForm: updatedPropertyForm });
+    }
+
+    handleChangeEvent = (event) => {
+        const updatedPropertyForm = { ...this.state.propertyForm };
+        updatedPropertyForm[event.target.id] = event.target.value;
+
+        this.setState(
+            {
+                propertyForm: updatedPropertyForm
+            }
+        )
+    }
+
+    updateProperty = (event) => {
+        event.preventDefault();
+
+        const propertyToUpdate = {
             propertyName: this.state.propertyForm.propertyName,
             address: this.state.propertyForm.address,
             city: this.state.propertyForm.city,
             state: this.state.propertyForm.state,
-            zipCode: this.state.propertyForm.zipCode
+            zipCode: this.state.propertyForm.zipCode,
         }
 
-        const url = '/api/property/';
-        this.props.onCreateProperty(url, propertyToCreate, {...this.props});
-    }
+        const url = "/api/property/" + this.props.data.id;
 
-    redirectToOwnerList = () => {
-        this.props.history.push('/property-list');
+        this.props.onUpdateProperty(url, propertyToUpdate, { ...this.props });
     }
-
     render() {
         return (
             <div className="wrapper">
@@ -56,7 +68,7 @@ class CreateProperty extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box">
-                                <h4 className="page-title">Add a Property</h4>
+                                <h4 className="page-title">Edit a Property</h4>
                             </div>
                         </div>
                     </div>
@@ -69,7 +81,7 @@ class CreateProperty extends Component {
                                 <div className="card-body">
                                     <h4 className="header-title">Basic Information</h4>
 
-                                    <form onSubmit={e => this.createProperty(e)}>
+                                    <form onSubmit={e => this.updateProperty(e)}>
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="propertyName" className="col-form-label">Property Name</label>
@@ -99,7 +111,7 @@ class CreateProperty extends Component {
                                         </div>
 
 
-                                        <button type="submit" className="btn btn-primary waves-effect waves-light">Submit</button>
+                                        <button type="submit" className="btn btn-primary waves-effect waves-light">Update</button>
 
                                     </form>
 
@@ -109,8 +121,8 @@ class CreateProperty extends Component {
                     </div >
 
                     <SuccessModal show={this.props.showSuccessModal}
-                        modalHeaderText={'Success'}
-                        modalBodyText={'New property created'}
+                        modalHeaderText={'Success!'}
+                        modalBodyText={'Property updated'}
                         okButtonText={'OK'}
                         successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
 
@@ -120,24 +132,27 @@ class CreateProperty extends Component {
                         okButtonText={'OK'} closeModal={() => this.props.onCloseErrorModal()} />
                 </div>
             </div>
-        );
+
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
+        data: state.repository.data,
         showSuccessModal: state.repository.showSuccessModal,
         showErrorModal: state.errorHandler.showErrorModal,
         errorMessage: state.errorHandler.errorMessage
     }
 }
 
-const mapPropsToDispatch = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onCreateProperty: (url, property, props) => dispatch(repositoryActions.postData(url, property, props)),
-        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(url, props)),
+        onGetPropertyById: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onUpdateProperty: (url, owner, props) => dispatch(repositoryActions.putData(url, owner, props)),
+        onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch)(CreateProperty);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProperty);
