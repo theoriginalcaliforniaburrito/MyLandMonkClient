@@ -1,19 +1,17 @@
 import React from 'react';
-import { Grid, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Navigation from '../Navigation/Navigation';
-import Aux from '../../hoc/Auxiliary/Auxiliary';
 
 const Layout = (props) => {
     return (
-        <Aux>
-            <Navigation />
-            <Grid>
-                <main>
-                    {props.children}
-                </main>
-            </Grid>
-        </Aux>
-
+        <Container>
+            <Row>
+                <Navigation />
+            </Row>
+            <main>
+                {props.children}
+            </main>
+        </Container>
     );
 }
 
