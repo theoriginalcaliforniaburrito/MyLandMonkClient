@@ -103,8 +103,8 @@ class CreateProperty extends Component {
                     </div >
 
                     <SuccessModal show={this.props.showSuccessModal}
-                        modalHeaderText={'Success message'}
-                        modalBodyText={'Action completed successfully'}
+                        modalHeaderText={'Success!'}
+                        modalBodyText={'New property created'}
                         okButtonText={'OK'}
                         successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
 
