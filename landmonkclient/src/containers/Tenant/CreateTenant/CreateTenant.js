@@ -78,7 +78,7 @@ class CreateTenant extends Component {
 
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
-                                                <label htmlFor="email" className="col-form-label">email</label>
+                                                <label htmlFor="email" className="col-form-label">Email</label>
                                                 <input type="text" required
                                                     value={this.state.tenantForm.email} onChange={e => this.handleChangeEvent(e)} className="form-control" id="email" />
                                             </div>

@@ -54,7 +54,7 @@ class DeleteTenant extends Component {
     }
 
     redirectToTenantList = () => {
-        this.props.history.push('/tenant-list');
+        this.props.history.push('/tenants');
     }
 
     render() {
@@ -66,7 +66,7 @@ class DeleteTenant extends Component {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box">
-                                <h4 className="page-title">Edit Tenant</h4>
+                                <h4 className="page-title">Delete Tenant</h4>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ class DeleteTenant extends Component {
 
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
-                                                <label htmlFor="email" className="col-form-label">email</label>
+                                                <label htmlFor="email" className="col-form-label">Email</label>
                                                 <input type="text" required
                                                     value={this.state.tenantForm.email} onChange={e => this.handleChangeEvent(e)} className="form-control" id="email" />
                                             </div>
@@ -124,7 +124,7 @@ class DeleteTenant extends Component {
                         modalHeaderText={'Success!'}
                         modalBodyText={'Tenant Deleted'}
                         okButtonText={'OK'}
-                        successClick={() => this.props.onCloseSuccessModal('/properties', { ...this.props })} />
+                        successClick={() => this.props.onCloseSuccessModal('/tenants', { ...this.props })} />
 
                     <ErrorModal show={this.props.showErrorModal}
                         modalHeaderText={'Error!'}
