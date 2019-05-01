@@ -16,6 +16,7 @@ const redirectToDeleteProperty = (id, history) => {
 }
  
 const property = (props) => {
+    console.log(props)
     return (
         <Aux>
             <div className="row">

@@ -15,7 +15,7 @@ class PropertyDetails extends Component {
     }
  
     render() { 
-        const property = this.props.data;
+        let property = { ...this.props.data };
 
         return ( 
             <Aux>
@@ -56,4 +56,4 @@ const mapPropsToDispatch = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapPropsToDispatch) (PropertyDetails);
+export default connect(mapStateToProps, mapPropsToDispatch)(PropertyDetails);
