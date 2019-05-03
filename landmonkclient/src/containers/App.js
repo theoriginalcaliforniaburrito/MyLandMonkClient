@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/Home';
+import LoginForm from '../components/LoginForm/LoginForm';
 import Layout from '../components/Layout/Layout';
 import PropertyList from '../containers/Property/PropertyList/PropertyList';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
@@ -23,6 +24,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/loginForm"  component={LoginForm} />
             <Route path="/properties" component={PropertyList} />
             <Route path="/createProperty" component={CreateProperty} />
             <Route path="/propertyDetails/:id" component={PropertyDetails} />
