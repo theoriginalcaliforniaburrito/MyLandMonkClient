@@ -50,6 +50,12 @@ const Navigation = props =>
                             </Link>
                         </li>
 
+                        <li>
+                            <Link to='/dashboard'>
+                                <i class="fe-airplay"></i> Admin
+                            </Link>
+                        </li>
+
                     </ul>
                     {/* <!-- End navigation menu --> */}
 
