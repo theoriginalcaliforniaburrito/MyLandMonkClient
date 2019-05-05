@@ -39,7 +39,7 @@ class SignUpForm extends Component {
             password: this.state.signUpForm.password
         }
 
-        const url = '/api/loginForm';
+        const url = '/api/user';
         this.props.onCreateUser(url, userToCreate, { ...this.props });
         
         this.setState({
@@ -63,7 +63,7 @@ class SignUpForm extends Component {
                             type="text"
                             className="form-control"
                             id="firstName"
-                            placeholder="Fist Name"
+                            placeholder="First Name"
                             value={this.state.signUpForm.firstName}
                             onChange={this.handleChange} />
                     </div>
