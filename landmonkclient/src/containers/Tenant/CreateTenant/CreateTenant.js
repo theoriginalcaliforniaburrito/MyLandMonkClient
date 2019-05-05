@@ -109,7 +109,7 @@ class CreateTenant extends Component {
                         modalHeaderText={'Success!'}
                         modalBodyText={'Tenant created'}
                         okButtonText={'OK'}
-                        successClick={() => this.props.onCloseSuccessModal('/tenant', { ...this.props })} />
+                        successClick={() => this.props.onCloseSuccessModal('/tenants', { ...this.props })} />
 
                     <ErrorModal show={this.props.showErrorModal}
                         modalHeaderText={'Error!'}
