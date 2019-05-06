@@ -125,7 +125,7 @@ class EditTenant extends Component {
                         modalHeaderText={'Success!'}
                         modalBodyText={'Tenant updated'}
                         okButtonText={'OK'}
-                        successClick={() => this.props.onCloseSuccessModal('/tenant', { ...this.props })} />
+                        successClick={() => this.props.onCloseSuccessModal('/tenants', { ...this.props })} />
 
                     <ErrorModal show={this.props.showErrorModal}
                         modalHeaderText={'Error!'}
