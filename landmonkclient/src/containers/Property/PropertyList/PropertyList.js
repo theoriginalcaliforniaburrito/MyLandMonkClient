@@ -60,9 +60,6 @@ class PropertyList extends Component {
             propertyFilter: newProperty
         });
 
-
-      
-
     }
 
 
@@ -92,7 +89,7 @@ class PropertyList extends Component {
                                     </Link>
                                 </div>
                                 <div className="search">
-                                <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search..." />
+                                <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search Properities..." />
                                 </div>
                                 <h4 className="page-title">Properties</h4>
                             </div>
