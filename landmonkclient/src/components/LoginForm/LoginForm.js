@@ -35,7 +35,8 @@ class LoginForm extends Component {
         e.preventDefault();
 
         const info = { ...this.state.loginForm };
-        if (info.username === this.props.data.username && info.password === this.props.data.password){
+        if (info.username === this.props.data.user.username && info.password === this.props.data.user.password){
+            
             
             info.isLoggedIn = true;
             info.username = '';
