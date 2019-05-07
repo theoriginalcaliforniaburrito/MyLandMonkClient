@@ -35,9 +35,9 @@ const property = (props) => {
                             </div>
                             <div className="col-sm-6">
                                 <div className="text-sm-right">
-                                    <Button onClick={() => redirectToPropertyDetails(props.property.id, props.history)}>Details</Button>
-                                    <Button variant="success" onClick={() => redirectToUpdateProperty(props.property.id, props.history)}>Edit</Button>
-                                    <Button variant="danger" onClick={() => redirectToDeleteProperty(props.property.id, props.history)}>Delete</Button>
+                                    <Button className="threeBtn" onClick={() => redirectToPropertyDetails(props.property.id, props.history)}>Details</Button>
+                                    <Button className="threeBtn" variant="success" onClick={() => redirectToUpdateProperty(props.property.id, props.history)}>Edit</Button>
+                                    <Button className="threeBtn" variant="danger" onClick={() => redirectToDeleteProperty(props.property.id, props.history)}>Delete</Button>
                                 </div>
                             </div>
                         </div>

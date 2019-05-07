@@ -111,7 +111,7 @@ class DeleteTenant extends Component {
 
                                         <button className="btn btn-info waves-effect waves-light" onClick={this.redirectToTenantList}>Cancel</button>
 
-                                        <button type="submit" className="btn btn-danger waves-effect waves-light">Delete</button>
+                                        <button type="submit" className="btn btn-danger waves-effect waves-light deleteComponent">Delete</button>
 
                                     </form>
 
