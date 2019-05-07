@@ -52,7 +52,7 @@ const Navigation = props =>
 
                         <li>
                             <Link to='/dashboard'>
-                                <i class="fe-airplay"></i> Admin
+                                <i className="fe-airplay"></i> Admin
                             </Link>
                         </li>
 
