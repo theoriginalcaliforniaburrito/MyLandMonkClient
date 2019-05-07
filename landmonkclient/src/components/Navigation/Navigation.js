@@ -4,6 +4,7 @@ import TextLogo from '../../img/LandMonk-Text-Only-Logo.png';
 import Home from '../../img/home.png';
 import Buildings from '../../img/buildings.png';
 import User from '../../img/user.png';
+import Login from '../../img/login.png';
 
 
 const Navigation = props =>
@@ -55,6 +56,13 @@ const Navigation = props =>
                                 <i className="fe-airplay"></i> Admin
                             </Link>
                         </li>
+
+                        <li>
+                            <Link to ="/loginForm">
+                                <i className="fe-lock"></i> Login
+                            </Link>
+                        </li>
+                        
 
                     </ul>
                     {/* <!-- End navigation menu --> */}
