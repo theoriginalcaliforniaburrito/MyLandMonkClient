@@ -57,10 +57,11 @@ const Navigation = props =>
                         </li>
 
                         <li>
-                            <Link to='/loginForm'>
+                            <Link to ="/loginForm">
                                 <i className="fe-lock"></i> Login
                             </Link>
                         </li>
+                        
 
                     </ul>
                     {/* <!-- End navigation menu --> */}
