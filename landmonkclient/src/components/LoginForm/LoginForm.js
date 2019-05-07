@@ -30,29 +30,32 @@ class LoginForm extends Component {
             loginForm: infoLoginForm
         })
     }
+    
 
     loginConfirmed = (e) =>{
         e.preventDefault();
-
+        // console.log(this.props.data);
         const info = { ...this.state.loginForm };
-        if (info.username === this.props.data.user.username && info.password === this.props.data.user.password){
-            
-            
+        let username = info.username;
+        const url = '/api/user/' + username + '/name';
+        this.props.onGetUserByUsername(url, { ...this.props });
+        
+    }
+    componentWillReceiveProps = (nextProps) => {
+        // console.log(nextProps);
+        // console.log(this.state.loginForm.password);
+        const info = { ...this.state.loginForm };        
+        if (info.password === nextProps.data.password){
             info.isLoggedIn = true;
-            info.username = '';
-            info.password = '';
-            console.log(info);
+            
             this.setState({
                 loginForm: info
             }) 
         }
-        
+
     }
     render() {
         if(this.state.loginForm.isLoggedIn === true){
-            this.setState({
-                isLoggedIn: false
-            })
             return <Redirect to='/' />
         }
         return (
@@ -116,6 +119,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onGetUsers: (url, props) => dispatch(repositoryActions.getData(url, props)),
+        onGetUserByUsername: (url, props) => dispatch(repositoryActions.getData(url, props)),
         onCloseSuccessModal: (url, props) => dispatch(repositoryActions.closeSuccessModal(props, url)),
         onCloseErrorModal: () => dispatch(errorHandlerActions.closeErrorModal())
     }
