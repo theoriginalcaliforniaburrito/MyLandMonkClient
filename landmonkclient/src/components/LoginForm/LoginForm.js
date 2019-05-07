@@ -17,7 +17,8 @@ class LoginForm extends Component {
         {
             username: '',
             password: '',
-            isLoggedIn: false
+            isLoggedIn: false,
+            hasError: false
         }
     ]
     }
@@ -51,6 +52,10 @@ class LoginForm extends Component {
             this.setState({
                 loginForm: info
             }) 
+        } else {
+            this.setState({
+                hasError: true
+            }) 
         }
 
     }
@@ -69,7 +74,7 @@ class LoginForm extends Component {
                                     <label>Username</label>
                                     <input 
                                         type="username" 
-                                        className="form-control" 
+                                        className={this.state.hasError ? "form-control border-danger" : "form-control"} 
                                         id="username" 
                                         placeholder="Enter Username" 
                                         value={this.state.loginForm.username}
@@ -79,7 +84,7 @@ class LoginForm extends Component {
                                     <label>Password</label>
                                     <input 
                                         type="password" 
-                                        className="form-control" 
+                                        className={this.state.hasError ? "form-control border-danger" : "form-control"} 
                                         id="password" 
                                         placeholder="Enter Password" 
                                         value={this.state.loginForm.password}
