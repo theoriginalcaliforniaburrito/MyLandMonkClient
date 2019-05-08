@@ -7,19 +7,23 @@ import * as repositoryActions from '../../../store/actions/repositoryActions'
 class TenantList extends Component {
 
     state = {
-        tenantFilter: []
+
+        tenantFilter: [],
+        sortMe: true
+
     }
 
     componentDidMount() {
         let url = '/api/tenant';
         this.props.onGetData(url, { ...this.props });
     }
-    
-   
+
+
     componentWillReceiveProps(nextProps) {
         this.setState({
 
-            tenantFilter: nextProps.data
+            tenantFilter: nextProps.data,
+            // tenantSort: nextProps.data
 
         })
     }
@@ -39,14 +43,14 @@ class TenantList extends Component {
                 const fullName = input.firstName.toLowerCase() + " " + input.lastName.toLowerCase();
 
                 const filter = e.target.value.toLowerCase().trim();
-                
+
                 return email.includes(filter) || phone.includes(filter)
-                || tenantName.includes(filter) || fullName.includes(filter);
+                    || tenantName.includes(filter) || fullName.includes(filter);
 
             });
         }
         else {
-            newTenant = this.props.data; 
+            newTenant = this.props.data;
         }
 
         this.setState({
@@ -54,30 +58,67 @@ class TenantList extends Component {
         })
     }
 
+    sortList = () => {
+
+        let sortList = this.state.tenantFilter;
+
+        if (this.state.sortMe) {
+
+            sortList.sort((a, b) => a.firstName.localeCompare(b.firstName));
+
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortMe: false
+
+            })
+
+        }
+
+        else if (this.state.sortMe === false) {
+            console.log("DERP");
+
+            sortList.sort((b, a) => a.firstName.localeCompare(b.firstName));
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortMe: true
+
+            })
+
+
+        }
+
+
+        console.log(this.state.sortMe)
+
+    }
+
 
 
     render() {
-        let tenants = []; 
+
+
+
+        console.log(this.props.data)
+
+        let tenants = [];
         if (this.state.tenantFilter && this.state.tenantFilter.length > 0) {
             tenants = this.state.tenantFilter.map((tenant) => {
                 return (
-                    <Tenant key ={tenant.id} tenant={tenant} {...this.props} />
+                    <Tenant key={tenant.id} tenant={tenant} {...this.props} />
                 )
             })
 
         }
 
 
-        // let tenants;
-        // if (this.props.data && this.props.data.length > 0) {
-        //     tenants = this.props.data.map((tenant) => {
-        //         return (
-        //             <Tenant key={tenant.id} tenant={tenant} {...this.props} />
-        //         )
-        //     })
-        // }
         return (
+
             <div className="wrapper">
+
                 <div className="container-fluid">
 
                     {/* <!-- start page title --> */}
@@ -90,7 +131,7 @@ class TenantList extends Component {
                                     </Link>
                                 </div>
                                 <div className="search">
-                                <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search Tenants..." />
+                                    <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search Tenants..." />
                                 </div>
                                 <h4 className="page-title">Tenants</h4>
                             </div>
@@ -107,7 +148,7 @@ class TenantList extends Component {
                                     <table id="basic-datatable" className="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th title="CLICK TO ALPHABET!!" onClick={this.sortList}>Name</th>
                                                 <th>Email</th>
                                                 <th>Cell Phone</th>
                                             </tr>
