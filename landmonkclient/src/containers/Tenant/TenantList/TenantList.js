@@ -67,15 +67,6 @@ class TenantList extends Component {
 
         }
 
-
-        // let tenants;
-        // if (this.props.data && this.props.data.length > 0) {
-        //     tenants = this.props.data.map((tenant) => {
-        //         return (
-        //             <Tenant key={tenant.id} tenant={tenant} {...this.props} />
-        //         )
-        //     })
-        // }
         return (
             <div className="wrapper">
                 <div className="container-fluid">
