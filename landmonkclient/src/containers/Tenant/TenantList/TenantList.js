@@ -9,7 +9,8 @@ class TenantList extends Component {
     state = {
 
         tenantFilter: [],
-        sortMe: true
+        sortFirst: true,
+        sortLast: true
 
     }
 
@@ -58,11 +59,11 @@ class TenantList extends Component {
         })
     }
 
-    sortList = () => {
+    sortFirstName = () => {
 
         let sortList = this.state.tenantFilter;
 
-        if (this.state.sortMe) {
+        if (this.state.sortFirst) {
 
             sortList.sort((a, b) => a.firstName.localeCompare(b.firstName));
 
@@ -70,21 +71,21 @@ class TenantList extends Component {
             this.setState({
 
                 tenantFilter: sortList,
-                sortMe: false
+                sortFirst: false
 
             })
 
         }
 
-        if (this.state.sortMe === false) {
-            console.log("DERP");
+        if (this.state.sortFirst === false) {
+         
 
             sortList.sort((b, a) => a.firstName.localeCompare(b.firstName));
 
             this.setState({
 
                 tenantFilter: sortList,
-                sortMe: true
+                sortFirst: true
 
             })
 
@@ -92,9 +93,44 @@ class TenantList extends Component {
         }
 
 
-        console.log(this.state.sortMe)
+    }
+
+    sortLastName = () => {
+
+        let sortList = this.state.tenantFilter;
+
+        if (this.state.sortLast) {
+
+            sortList.sort((b, a) => a.lastName.localeCompare(b.lastName));
+
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortLast: false
+
+            })
+
+        }
+
+        if (this.state.sortLast === false) {
+         
+
+            sortList.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortLast: true
+
+            })
+
+
+        }
+
 
     }
+
 
 
 
@@ -148,7 +184,8 @@ class TenantList extends Component {
                                     <table id="basic-datatable" className="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th title="Toggle Tenant List Alphabetically, Ascending or Decending" onClick={this.sortList}>Name</th>
+                                                <th className="firstName" title="Toggle First Name Alphabetically, Ascending or Decending" onClick={this.sortFirstName}>First Name</th>
+                                                <th title="Toggle Last Name Alphabetically, Ascending or Decending" onClick={this.sortLastName}>Last Name</th>
                                                 <th>Email</th>
                                                 <th>Cell Phone</th>
                                             </tr>
