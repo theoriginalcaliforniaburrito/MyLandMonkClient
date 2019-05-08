@@ -36,8 +36,8 @@ class PropertyDetails extends Component {
                         </div>
                         {/* <!-- end page title --> */}
                         <Property property={property} {...this.props} />
-                        <Link to={`/propertyDetails/${this.props.match.params.id}/createUnit`}>
-                            <button className="btn btn-primary">Add Unit</button>
+                        <Link className="btn btn-primary" to={`/propertyDetails/${this.props.match.params.id}/createUnit`}>
+                            Add Unit
                         </Link>
                         <PropertyUnits units={property.units} />
                     </div>

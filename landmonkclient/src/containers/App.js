@@ -29,10 +29,10 @@ class App extends Component {
             <Route path="/loginForm"  component={LoginForm} />
             <Route path="/properties" component={PropertyList} />
             <Route path="/createProperty" component={CreateProperty} />
+            <Route exact path="/propertyDetails/:id/createUnit" component={CreateUnit}/>
             <Route path="/propertyDetails/:id" component={PropertyDetails} />
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
-            <Route exact path="/propertyDetails/:id/createUnit" component={CreateUnit}/>
 
             <Route path="/tenants" component={TenantList} />
             <Route path="/createTenant/" component={CreateTenant} />
