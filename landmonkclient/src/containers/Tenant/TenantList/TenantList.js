@@ -23,7 +23,7 @@ class TenantList extends Component {
         this.setState({
 
             tenantFilter: nextProps.data,
-            // tenantSort: nextProps.data
+         
 
         })
     }
@@ -76,7 +76,7 @@ class TenantList extends Component {
 
         }
 
-        else if (this.state.sortMe === false) {
+        if (this.state.sortMe === false) {
             console.log("DERP");
 
             sortList.sort((b, a) => a.firstName.localeCompare(b.firstName));
@@ -148,7 +148,7 @@ class TenantList extends Component {
                                     <table id="basic-datatable" className="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th title="CLICK TO ALPHABET!!" onClick={this.sortList}>Name</th>
+                                                <th title="Toggle Tenant List Alphabetically, Ascending or Decending" onClick={this.sortList}>Name</th>
                                                 <th>Email</th>
                                                 <th>Cell Phone</th>
                                             </tr>
