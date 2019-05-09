@@ -12,7 +12,8 @@ const redirectToDeleteTenant = (id, history) => {
 const Tenants = (props) => {
     return (
         <tr>
-            <td>{`${props.tenant.firstName} ${props.tenant.lastName} `}</td>
+            <td>{`${props.tenant.firstName}`}</td>
+            <td>{`${props.tenant.lastName}`}</td>
             <td>{props.tenant.email}</td>
             <td>{props.tenant.cellPhone}</td>
             <td>

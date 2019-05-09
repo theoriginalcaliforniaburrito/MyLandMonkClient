@@ -7,19 +7,24 @@ import * as repositoryActions from '../../../store/actions/repositoryActions'
 class TenantList extends Component {
 
     state = {
-        tenantFilter: []
+
+        tenantFilter: [],
+        sortFirst: true,
+        sortLast: true
+
     }
 
     componentDidMount() {
         let url = '/api/tenant';
         this.props.onGetData(url, { ...this.props });
     }
-    
-   
+
+
     componentWillReceiveProps(nextProps) {
         this.setState({
 
-            tenantFilter: nextProps.data
+            tenantFilter: nextProps.data,
+         
 
         })
     }
@@ -39,14 +44,14 @@ class TenantList extends Component {
                 const fullName = input.firstName.toLowerCase() + " " + input.lastName.toLowerCase();
 
                 const filter = e.target.value.toLowerCase().trim();
-                
+
                 return email.includes(filter) || phone.includes(filter)
-                || tenantName.includes(filter) || fullName.includes(filter);
+                    || tenantName.includes(filter) || fullName.includes(filter);
 
             });
         }
         else {
-            newTenant = this.props.data; 
+            newTenant = this.props.data;
         }
 
         this.setState({
@@ -54,30 +59,102 @@ class TenantList extends Component {
         })
     }
 
+    sortFirstName = () => {
+
+        let sortList = this.state.tenantFilter;
+
+        if (this.state.sortFirst) {
+
+            sortList.sort((a, b) => a.firstName.localeCompare(b.firstName));
+
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortFirst: false
+
+            })
+
+        }
+
+        if (this.state.sortFirst === false) {
+         
+
+            sortList.sort((b, a) => a.firstName.localeCompare(b.firstName));
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortFirst: true
+
+            })
+
+
+        }
+
+
+    }
+
+    sortLastName = () => {
+
+        let sortList = this.state.tenantFilter;
+
+        if (this.state.sortLast) {
+
+            sortList.sort((b, a) => a.lastName.localeCompare(b.lastName));
+
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortLast: false
+
+            })
+
+        }
+
+        if (this.state.sortLast === false) {
+         
+
+            sortList.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+            this.setState({
+
+                tenantFilter: sortList,
+                sortLast: true
+
+            })
+
+
+        }
+
+
+    }
+
+
 
 
     render() {
-        let tenants = []; 
+
+
+
+        console.log(this.props.data)
+
+        let tenants = [];
         if (this.state.tenantFilter && this.state.tenantFilter.length > 0) {
             tenants = this.state.tenantFilter.map((tenant) => {
                 return (
-                    <Tenant key ={tenant.id} tenant={tenant} {...this.props} />
+                    <Tenant key={tenant.id} tenant={tenant} {...this.props} />
                 )
             })
 
         }
 
 
-        // let tenants;
-        // if (this.props.data && this.props.data.length > 0) {
-        //     tenants = this.props.data.map((tenant) => {
-        //         return (
-        //             <Tenant key={tenant.id} tenant={tenant} {...this.props} />
-        //         )
-        //     })
-        // }
         return (
+
             <div className="wrapper">
+
                 <div className="container-fluid">
 
                     {/* <!-- start page title --> */}
@@ -90,7 +167,7 @@ class TenantList extends Component {
                                     </Link>
                                 </div>
                                 <div className="search">
-                                <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search Tenants..." />
+                                    <input type="text" className="searchBar" onChange={this.handleChange} placeholder="Search Tenants..." />
                                 </div>
                                 <h4 className="page-title">Tenants</h4>
                             </div>
@@ -107,7 +184,8 @@ class TenantList extends Component {
                                     <table id="basic-datatable" className="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th className="firstName" title="Toggle First Name Alphabetically, Ascending or Decending" onClick={this.sortFirstName}>First Name</th>
+                                                <th title="Toggle Last Name Alphabetically, Ascending or Decending" onClick={this.sortLastName}>Last Name</th>
                                                 <th>Email</th>
                                                 <th>Cell Phone</th>
                                             </tr>
