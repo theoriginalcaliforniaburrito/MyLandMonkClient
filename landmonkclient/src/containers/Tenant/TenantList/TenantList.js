@@ -184,8 +184,8 @@ class TenantList extends Component {
                                     <table id="basic-datatable" className="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
-                                                <th className="firstName" title="Toggle First Name Alphabetically, Ascending or Decending" onClick={this.sortFirstName}>First Name</th>
-                                                <th title="Toggle Last Name Alphabetically, Ascending or Decending" onClick={this.sortLastName}>Last Name</th>
+                                                <th className="firstName" style={{cursor:'pointer'}} title="Toggle First Name Alphabetically, Ascending or Decending" onClick={this.sortFirstName}>First Name</th>
+                                                <th style={{cursor:'pointer'}} title="Toggle Last Name Alphabetically, Ascending or Decending" onClick={this.sortLastName}>Last Name</th>
                                                 <th>Email</th>
                                                 <th>Cell Phone</th>
                                             </tr>
