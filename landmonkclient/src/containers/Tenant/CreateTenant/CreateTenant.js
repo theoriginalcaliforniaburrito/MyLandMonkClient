@@ -80,7 +80,7 @@ class CreateTenant extends Component {
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="email" className="col-form-label">Email</label>
-                                                <input type="text" required
+                                                <input type="email" required
                                                     value={this.state.tenantForm.email} onChange={e => this.handleChangeEvent(e)} className="form-control" id="email" />
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@ class CreateTenant extends Component {
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="cellPhone" className="col-form-label">Cell Phone</label>
-                                                <input type="text" required
+                                                <input type="tel"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" required
                                                     value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="cellPhone" />
                                             </div>
                                         </div>
