@@ -150,7 +150,6 @@ class TenantList extends Component {
 
         }
 
-
         return (
 
             <div className="wrapper">
