@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as repositoryActions from '../../../store/actions/repositoryActions';
 import * as errorHandlerActions from '../../../store/actions/errorHandlerActions';
 import Logo from '../../../img/LandMonk-Logo---transparent-bkg---215x218.jpg'
+import NumberFormat from 'react-number-format';
 
 class EditTenant extends Component {
     state = {
@@ -104,8 +105,20 @@ class EditTenant extends Component {
                                         <div className="form-row">
                                             <div className="form-group col-md-6">
                                                 <label htmlFor="cellPhone" className="col-form-label">Cell Phone</label>
-                                                <input type="text" required
-                                                    value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="cellPhone" />
+                                                
+                                                <NumberFormat 
+                                                    type="tel" 
+                                                    required
+                                                    value={this.state.tenantForm.cellPhone} 
+                                                    onChange={e => this.handleChangeEvent(e)} 
+                                                    className="form-control" 
+                                                    id="cellPhone" 
+                                                    placeholder="###-###-####"
+                                                    format="###-###-####" 
+                                                    mask="_"/>
+
+                                                {/* <input type="text" required
+                                                    value={this.state.tenantForm.cellPhone} onChange={e => this.handleChangeEvent(e)} className="form-control" id="cellPhone" /> */}
                                             </div>
                                         </div>
 
