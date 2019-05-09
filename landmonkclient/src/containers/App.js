@@ -6,6 +6,8 @@ import LoginForm from '../components/LoginForm/LoginForm';
 import Layout from '../components/Layout/Layout';
 import PropertyList from '../containers/Property/PropertyList/PropertyList';
 import CreateProperty from './Property/CreateProperty/CreateProperty';
+import CreateUnit from './Unit/CreateUnit/CreateUnit';
+
 import DeleteTenant from './Tenant/DeleteTenant/DeleteTenant';
 import UpdateTenant from './Tenant/UpdateTenant/UpdateTenant';
 import CreateTenant from './Tenant/CreateTenant/CreateTenant';
@@ -27,9 +29,11 @@ class App extends Component {
             <Route path="/loginForm"  component={LoginForm} />
             <Route path="/properties" component={PropertyList} />
             <Route path="/createProperty" component={CreateProperty} />
+            <Route exact path="/propertyDetails/:id/createUnit" component={CreateUnit}/>
             <Route path="/propertyDetails/:id" component={PropertyDetails} />
             <Route path="/updateProperty/:id" component={UpdateProperty} />
             <Route path="/deleteProperty/:id" component={DeleteProperty} />
+
             <Route path="/tenants" component={TenantList} />
             <Route path="/createTenant/" component={CreateTenant} />
             <Route path="/updateTenant/:id" component={UpdateTenant} />

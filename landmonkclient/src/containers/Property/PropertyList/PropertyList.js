@@ -41,7 +41,9 @@ class PropertyList extends Component {
                 const city = input.city.toLowerCase();
                 const zip = input.zipCode;
                 
-                const filter = e.target.value.toLowerCase();
+                const filter = e.target.value.toLowerCase().trim();
+
+            
                 
               
         
