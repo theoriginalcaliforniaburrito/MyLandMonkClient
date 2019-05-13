@@ -5,10 +5,9 @@
 
 ## My Developer Role
 * Added CRUD manipulation of back end database to client side application:
-* 1. Added ability to display lists of all properties with their respective units.
-* 2. Created a component to add new properties.
-* 3. Added details page to properties with the ability to delete and update data.
-* 4. Contributed to adding these same features to tenants. 
+* 1. Added ability to display lists of all tenants.
+* 2. Created a component to delete properties. 
+* 3. Added details page to properties with the ability to update data.
 
 
 ## Home Page
