@@ -1,7 +1,7 @@
-# DontLoseYourLicense
+# LandMonk Client
 
 ## About
-* Knowing all the lastest rules and regulations in a brand new industry is very important. Laws change daily and need to be more avalible for people to follow, and thats the whole idea behind this Web Application.
+* LandMonk is a property management software that empowers landlords to self-manage their rental homes and apartments. 
 
 ## My Developer Role
 * Lead C# Back End Developer with features integrated such as:
@@ -12,4 +12,4 @@
 
 
 ## Home Page
-![Feed](https://github.com/theoriginalcaliforniaburrito/MyLandMonkClient/issues/1#issue-443510795)
+![Home](https://github.com/theoriginalcaliforniaburrito/MyLandMonkClient/issues/1#issue-443510795)
