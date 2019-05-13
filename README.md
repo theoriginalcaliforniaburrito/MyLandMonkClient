@@ -4,7 +4,7 @@
 * LandMonk is a property management software that empowers landlords to self-manage their rental homes and apartments. 
 
 ## My Developer Role
-* Added CRUD manipulation of back end database to client side application in React:
+* Added CRUD manipulation of back end database to client side application in React by contributing the following:
 * 1. Added ability to display lists of all tenants.
 * 2. Created a component to delete properties. 
 * 3. Added details page to properties with the ability to update data.
